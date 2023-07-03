@@ -1,0 +1,31 @@
+import numpy as np
+import pandas as pd 
+from sklearn import metrics
+from sklearn.linear_model import LinearRegression
+from sklearn import svm
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+iris= pd.read_csv('Iris.csv')
+iris.describe()
+train,test=train_test_split(iris,test_size=0.25)
+print(train)
+print(test)
+train_x=train[['sepal.length','sepal.width','petal.length','petal.width']]
+train_y= train.Species
+print(train_x)
+print(train_y)
+test_x=test[['sepal.length','sepal.width','petal.length','petal.width']]
+test=test.Species
+ 
+model=svm.SVC()
+model.fit(train_x,train_y)
+pred=model.predict(test_x)
+
+print(pred)
+metrics.accuracy_score(pred,test_x)
+
+model=DecisionTreeClassifier()
+model.fit(train_x,train_y)
+pred= model.predict(test_x)
+
+metrics.accuracy_score(pred,test_x)
